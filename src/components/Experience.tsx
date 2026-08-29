@@ -34,16 +34,16 @@ export default function Experience({ stage, view }: ExperienceProps) {
   return (
     <div className="absolute inset-0 z-0 bg-[#0a192f]">
       <Canvas camera={{ position: [5, 5, 5], fov: 45 }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+        
+        <Building stage={stage} />
+        
+        <ContactShadows resolution={512} scale={20} blur={2} opacity={0.5} far={10} color="#000000" />
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-          
-          <Building stage={stage} />
-          
-          <ContactShadows resolution={1024} scale={20} blur={2} opacity={0.5} far={10} color="#000000" />
           <Environment preset="city" />
-          <SceneControls stage={stage} view={view} />
         </Suspense>
+        <SceneControls stage={stage} view={view} />
       </Canvas>
     </div>
   );
